@@ -32,7 +32,9 @@ services:
 
   keycloak:
     image: quay.io/keycloak/keycloak:26.4
-    command: start
+    command: 
+      - start
+      - --import-realm
     environment:
       KC_HOSTNAME: localhost
       KC_HOSTNAME_PORT: 8080
@@ -42,10 +44,9 @@ services:
       KC_HEALTH_ENABLED: true
       KEYCLOAK_ADMIN: ${KEYCLOAK_ADMIN}
       KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
-      KC_DB: postgres
-      KC_DB_URL: jdbc:postgresql://postgres/${POSTGRES_DB}
-      KC_DB_USERNAME: ${POSTGRES_USER}
-      KC_DB_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - ./data/keycloak.default.realm.json:/opt/keycloak/data/import/keycloak.default.realm.json
+
     ports:
       - 8080:8080
     restart: always
