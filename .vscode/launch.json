@@ -31,6 +31,22 @@
             "console": "integratedTerminal",
             "justMyCode": false
         },
+,
+        {
+            "name": "FastAPI Debug (uvicorn)",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "uvicorn",
+            "args": [
+                "app.main:app",  // caminho do seu arquivo principal
+                "--reload",
+                "--host", "127.0.0.1",
+                "--port", "8000",
+                "--lifespan", "on",
+            ],
+            "console": "integratedTerminal",
+            "justMyCode": false
+        },
         {
             "name": "Python: Attach",
             "type": "debugpy",

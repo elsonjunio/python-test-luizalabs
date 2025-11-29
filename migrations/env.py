@@ -7,6 +7,9 @@ from alembic import context
 from sqlalchemy import create_engine
 from app.core.database import Base
 
+import os
+from sqlalchemy.engine.url import make_url
+
 from app.core.database import target_metadata
 
 # this is the Alembic Config object, which provides
@@ -30,6 +33,17 @@ if config.config_file_name is not None:
 # ... etc.
 
 
+def get_url():
+    async_url = os.getenv("DATABASE_URL")
+
+    if not async_url:
+        async_url = config.get_main_option('sqlalchemy.url')
+
+    url = async_url.replace('asyncpg', 'psycopg2')
+
+    return url
+
+
 def run_migrations_offline() -> None:
     """Run migrations in 'offline' mode.
 
@@ -42,7 +56,8 @@ def run_migrations_offline() -> None:
     script output.
 
     """
-    url = config.get_main_option('sqlalchemy.url')
+    #url = config.get_main_option('sqlalchemy.url')
+    url = get_url()
     context.configure(
         url=url, target_metadata=target_metadata, literal_binds=True
     )
@@ -58,8 +73,9 @@ def run_migrations_online() -> None:
     and associate a connection with the context.
 
     """
-    configuration = config.get_section(config.config_ini_section)
-    url = configuration['sqlalchemy.url']
+    #configuration = config.get_section(config.config_ini_section)
+    #url = configuration['sqlalchemy.url']
+    url = get_url()
 
     connectable = create_engine(url, poolclass=pool.NullPool)
 
