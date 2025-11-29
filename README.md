@@ -1,4 +1,4 @@
-# Wishlist API – Sistema de Produtos Favoritos (LuizaLabs Challenge)
+# Wishlist API
 
 Este projeto implementa uma API REST de Wishlist para clientes, seguindo o cenário proposto no desafio técnico do LuizaLabs.
 
@@ -327,4 +327,4 @@ password: password
 Um tutorial rápido para adicionar usuário: https://learnitweb.com/spring-security/creating-new-realm-and-new-user-in-keycloak/
 
 ---
-Em caso de dúvidas, estou disponível no elsonjuniog@mail.com a qualquer momento.
+Em caso de dúvidas, estou disponível em elsonjuniog@mail.com a qualquer momento.
