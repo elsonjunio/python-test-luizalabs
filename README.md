@@ -325,3 +325,6 @@ password: password
 ```
 
 Um tutorial rápido para adicionar usuário: https://learnitweb.com/spring-security/creating-new-realm-and-new-user-in-keycloak/
+
+---
+Em caso de dúvidas, estou disponível no elsonjuniog@mail.com a qualquer momento.
