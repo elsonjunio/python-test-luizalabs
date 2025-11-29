@@ -1,6 +1,6 @@
 from sqlalchemy import Column, ForeignKey, Index
-from core.database import Base
-from core.models import TimestampMixin, SoftDeleteMixin
+from app.core.database import Base
+from app.models.control_column import TimestampMixin, SoftDeleteMixin
 from sqlalchemy.orm import Mapped, mapped_column
 from datetime import datetime
 from sqlalchemy import DateTime

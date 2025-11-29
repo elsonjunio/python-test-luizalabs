@@ -4,12 +4,11 @@ from pydantic_settings import BaseSettings
 
 class Settings(BaseSettings):
     DATABASE_URL: Optional[str] = None
-    JWT_SECRET: Optional[str] = None
-    JWT_ALGORITHM: str = 'HS256'
     ENV: str = 'dev'
 
-    ADMIN_EMAIL: str = 'admin@local.com'
-    ADMIN_PASSWORD: str = 'admin123'
+    AUTHORIZATION_URL: str = ''
+    TOKEN_URL: str = ''
+    JWKS_URI: str = ''
 
     class Config:
         env_file = '.env'

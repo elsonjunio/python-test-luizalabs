@@ -32,6 +32,7 @@ services:
 
   keycloak:
     image: quay.io/keycloak/keycloak:26.4
+    container_name: dev_keycloak
     command: 
       - start
       - --import-realm
@@ -65,34 +66,23 @@ services:
     networks:
       - devnet
 
-  localstack:
-    image: localstack/localstack:latest
-    container_name: dev_localstack
-    restart: unless-stopped
-    environment:
-      SERVICES: s3,sqs,sns,sts,lambda
-      DEBUG: 1
+  api:
+    build: ../
+    container_name: fastapi_app
+    env_file: .env
     ports:
-      - "4566:4566"
-      - "4571:4571"
-    volumes:
-      - "/var/run/docker.sock:/var/run/docker.sock"
-    networks:
-      - devnet
-
-  mailpit:
-    image: axllent/mailpit:latest
-    container_name: dev_mailpit
-    restart: unless-stopped
-    ports:
-      - "8025:8025"
-      - "1025:1025"
+      - "8000:8000"
+    depends_on:
+      - postgres
+      - keycloak
+      - redis
     networks:
       - devnet
 
 networks:
   devnet:
     driver: bridge
+    
 
 volumes:
   pgdata:

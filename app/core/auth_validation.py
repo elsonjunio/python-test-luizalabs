@@ -7,10 +7,10 @@ def require_user(request: Request):
     return request.state.current_user
 
 
-def require_role(*allowed_roles):
+def require_role(*roles):
     def wrapper(user=Depends(require_user)):
-        if user['role'] not in allowed_roles:
-            raise HTTPException(status_code=403, detail='Forbidden')
+        user_roles = user.get('roles', [])
+        if not any(r in user_roles for r in roles):
+            raise HTTPException(403, "Forbidden")
         return user
-
     return wrapper
